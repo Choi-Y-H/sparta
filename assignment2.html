@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+  <!-- HTML에 이 부분을 추가하고 -->
+  <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <title>원페이지 쇼핑몰</title>
+
+      <style>
+        /* CSS에 이 부분을 추가하면 완성! */
+    * {
+      font-family: 'Stylish', sans-serif;
+    }
+
+    .product {
+
+      width: 500px;
+      margin: auto;
+      padding-top: 50px;
+
+    }
+
+    .mb-3
+    {
+      width: 500px;
+      margin: auto;
+    }
+
+    .button
+    {
+      margin: auto;
+    }
+
+    .temp
+    {
+      color: blue;
+    }
+
+    </style>
+
+<script>
+  function ordering() {
+    let name = $('#ordername').val();
+    let count = $('#ordercount').val();
+    let address = $('#orderaddress').val();
+    let phonenumber = $("#orderphone").val();
+
+  if (name == ''){
+      alert('이름을 입력해주세요');
+    }
+  else if (count == '수량'){
+    alert('수량을 입력해주세요');
+  }
+    else if (address == ''){
+      alert('주소를 입력해주세요');
+  }
+  else if (phonenumber == ''){
+    alert('휴대폰번호를 입력해주세요');
+  }
+  else{
+        alert('주문이 완료되었습니다.');
+      }
+  }
+
+
+
+
+  $(document).ready(function(){
+	
+  $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                  let value = response[1]["rate"];
+                    let temp_html = `달러-원 환율 : ${value}`;
+                    $('#exchange').append(temp_html);
+                }
+            })
+});
+
+
+  
+
+</script>
+
+
+</head>
+
+<body>
+    <div class="product">
+      <div style="text-align : center;">
+        <img class="product-image" width="500px" src="https://pbs.twimg.com/media/DcUwFBsU8AAcpaJ.jpg">
+      </div>
+        <div class="product-info">
+         <h1 class="product-name">토마리, 고마리 쿠션 세트 <span style="font-size: medium;">가격 : 150,000원 /개</span></h1>
+         <div class="product-comment">이 상품은 시중에 판매되지 않는 리미티드 에디션 입니다.<p> Actoz 간담회 시에만 제작되는 귀여운 토마리 캐릭터 쿠션입니다.</p><p>(주의) 고마리는 항상 주인을 오징어로 본답니다!</p><p> 주문자 당 최대 2세트 구매하실 수 있습니다.</p></div>
+        </div>
+        <div class="temp" id="exchange"></div>
+
+        </div>
+   
+       
+       <div class="input-group mb-3">
+         <div class="input-group-prepend">
+           <span class="input-group-text" id="basic-addon3">주문자 이름</span>
+         </div>
+         <input type="text" class="form-control" id="ordername" aria-describedby="basic-addon1">
+       </div>
+
+       <div class="input-group mb-3">
+      <select class="custom-select" id="ordercount">
+      <option selected>수량</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      </select>
+      </div> 
+
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">주소</span>
+        </div>
+        <input type="text" class="form-control" id="orderaddress" aria-describedby="basic-addon1">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">전화번호</span>
+        </div>
+        <input type="text" class="form-control" id="orderphone" aria-describedby="basic-addon1">
+      </div>
+          
+      <div class="input-group mb-3">
+      <div class="button">
+        <button type="button" onclick="ordering()" class="btn btn-primary btn-lg">주문하기</button></div>
+      
+      </div>
+      
+       </div>
+      </p>
+
+      
+
+</body>
+
+
+</html>
